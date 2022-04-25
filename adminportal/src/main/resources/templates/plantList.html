@@ -1,0 +1,61 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1000/xhtml">
+<head th:replace="common/header :: common-header" />
+
+<body>
+	<div th:replace="common/header :: navbar" />
+	
+	<div class="container">
+		<div class="table-responsive">
+			<table id="plantListTable" class="table table-bordered table-hover table-striped">
+				<thead>
+					<tr>
+						<th><input th:id="selectAllplants" type="checkbox" /></th>
+						<th>Name</th>
+						<th>Botanical Name</th>
+						<th>Category</th>
+						<th>List Price</th>
+						<th>Our Price</th>
+						<th>Available?</th>
+						<th>Operation</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr data-th-each="plant : ${plantList}">
+						<td>
+						<input hidden="hidden" name="id" th:value="${plant.id}" />
+						<input th:id="'selected'+${plant.id}" class="checkboxplant" type="checkbox" />
+						</td>
+						<td><a th:href="@{/plant/plantInfo(id=${plant.id})}"><span th:text="${plant.name}"></span></a></td>
+						<td th:text="${plant.botanicalName}"></td>
+						<td th:text="${plant.category}"></td>
+						<td th:text="${plant.listPrice}"></td>
+						<td th:text="${plant.ourPrice}"></td>
+						<td th:text="${plant.active}"></td>
+						<td>
+							<input hidden="hidden" name="id" th:value="${plant.id}" />
+							<button th:id=" 'onePlant-'+${plant.id}" class="btn btn-danger btn-xs delete-plant" type="submit" th:action="@{/plant/remove}" value="delete" >
+							<span class="fa fa-times"></span>Delete</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	<button th:id="deleteSelected" class="btn btn-danger " th:action="@{/plant/remove}">Delete Selected</button>
+	</div>
+	
+	
+	<div th:replace="common/header :: body-bottom-scripts" />
+	
+	<script>
+		$(document).ready(function() {
+			$("#plantListTable").DataTable({
+				"lengthMenu": [ [5,10,15,20,-1],[5,10,15,20,"All"] ],
+				"ordering": false,
+				stateSave: true
+			});
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,214 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1000/xhtml">
+<head th:replace="common/header :: common-header" />
+
+<body>
+	<div th:replace="common/header :: navbar" />
+
+	<div class="container">
+		<div class="row">
+			<form class="form-horizontal" th:action="@{/plant/add}" method="post"
+				enctype="multipart/form-data">
+				<fieldset>
+					<legend class="center-block">
+						New Plant Information<span style="font-size: small">  * is a
+							required field</span>
+					</legend>
+
+
+					<!-- name -->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="name">* Name</label>
+
+						<div class="col-md-8">
+							<input type="text" name="name" class="form-control" id="name"
+								th:value="${plant.name}" required="required" placeholder="Title" />
+							<span class="help-block">Name of the plant</span>
+						</div>
+					</div>
+
+					<!-- botanicalName -->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="botanicalName">*
+							Botanical Name</label>
+						<div class="col-md-8">
+							<input type="text" name="botanicalName" class="form-control" id="botanicalName"
+								th:value="${plant.botanicalName}" required="required"
+								placeholder="botanicalName" /> <span class="help-block">Botanical Name
+								of the plant</span>
+						</div>
+					</div>
+
+					<!-- height -->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="height">Height</label>
+						<div class="col-md-8">
+							<input type="text" name="height" class="form-control"
+								id="height" th:value="${plant.height}"
+								placeholder="Height" /> <span class="help-block">Height
+								of the plant</span>
+						</div>
+					</div>
+
+					<!-- bloomTime  -->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="bloomTime">bloomTime
+							</label>
+						<div class="col-md-8">
+<!--							<input type="text" class="form-control" id="bloomTime"-->
+<!--								name="bloomTime" th:value="${plant.bloomTime}"-->
+<!--								placeholder="bloomTime" /> -->
+<!--							<span class="help-block">BloomTime of the plant</span>-->
+							<select th:value="${plant.bloomTime}" id="bloomTime" name="bloomTime"
+									class="form-control">
+								<option value="SUMMER"
+										th:selected="(${plant.bloomTime}=='SUMMER')">SUMMER</option>
+								<option value="SPRING"
+										th:selected="(${plant.bloomTime}=='SPRING')">SPRING</option>
+								<option value="NEVER"
+										th:selected="(${plant.bloomTime}=='NEVER')">NEVER</option>
+							</select>
+						</div>
+					</div>
+
+<!--					 difficultyLevel -->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="difficultyLevel">Difficulty Level</label>
+						<div class="col-md-8">
+							<select th:value="${plant.difficultyLevel}" id="difficultyLevel" name="difficultyLevel"
+								class="form-control">
+								<option value="EASY"
+										th:selected="(${plant.difficultyLevel}=='EASY')">EASY</option>
+								<option value="MEDIUM"
+										th:selected="(${plant.difficultyLevel}=='MEDIUM')">MEDIUM</option>
+								<option value="HARD"
+										th:selected="(${plant.difficultyLevel}=='HARD')">HARD</option>
+							</select>
+						</div>
+					</div>
+
+					<!-- category -->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="category">*
+							Category</label>
+						<div class="col-md-8">
+							<select th:value="${plant.category}" id="category" name="category"
+								class="form-control">
+								<option value="" selected="selected" disabled="disabled">Please
+									select an option...</option>
+								<option value="Hanging"
+									th:selected="(${plant.category}=='Hanging')">Hanging</option>
+								<option value="Indoor"
+									th:selected="(${plant.category}=='Indoor')">Indoor</option>
+								<option value="Outdoor"
+									th:selected="(${plant.category}=='Outdoor')">Outdoor</option>
+							</select>
+						</div>
+					</div>
+
+
+					<!-- shipping weight -->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="shippingWeight">Shipping
+							Weight</label>
+						<div class="col-md-8">
+							<div class="input-group">
+								<input th:value="${plant.shippingWeight}" type="number" step="0.01"
+									name="shippingWeight" class="form-control" id="shippingWeight"
+									placeholder="Shipping Weight" /> <span
+									class="input-group-addon">Ounces</span>
+							</div>
+							<span class="help-block">Shipping Weight of the plant</span>
+						</div>
+					</div>
+
+					<!-- list price -->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="listPrice">List
+							Price</label>
+						<div class="col-md-8">
+							<div class="input-group">
+								<span class="input-group-addon">$</span> <input
+									th:value="${plant.listPrice}" type="number" name="listPrice" step="0.01"
+									class="form-control" id="listPrice" placeholder="List Price" />
+							</div>
+							<span class="help-block">List price of the plant</span>
+						</div>
+					</div>
+
+					<!-- our price -->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="ourPrice">Our
+							Price</label>
+						<div class="col-md-8">
+							<div class="input-group">
+								<span class="input-group-addon">$</span> <input
+									th:value="${plant.ourPrice}" type="number" name="ourPrice" step="0.01"
+									class="form-control" id="ourPrice" placeholder="Our Price" />
+							</div>
+							<span class="help-block">Our price of the plant</span>
+						</div>
+					</div>
+
+					<!-- in stock number -->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="inStockNumber">Number
+							in stock</label>
+						<div class="col-md-8">
+							<input th:value="${plant.inStockNumber}" type="number"
+								name="inStockNumber" class="form-control" id="inStockNumber"
+								placeholder="Number of in-stock copies" /> <span
+								class="help-block">Number in stock </span>
+						</div>
+					</div>
+
+					<!-- status of plant -->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="status">Status</label>
+						<div class="col-md-8">
+							<label><input value="true" type="radio" name="active"
+								checked="checked" /> Available </label> <label><input
+								value="false" type="radio" name="active" />
+								Not Available </label> <span class="help-block">Whether the plant is
+								available or not available</span>
+						</div>
+					</div>
+
+					<!-- description -->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="description">Description</label>
+						<div class="col-md-8">
+							<textarea name="description" rows="5" class="form-control"
+								id="description" th:value="${plant.description}"
+								placeholder="Description" /></textarea>
+							<span class="help-block">Description of the plant</span>
+						</div>
+					</div>
+
+					<!-- upload image -->
+					<div class="form-group">
+						<div class="col-md-2">
+							<label for="plantImageFile">Upload plant image</label>
+						</div>
+						<div class="col-md-8">
+							<input id="plantImageFile" type="file" name="plantImageFile"/>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-md-2"></div>
+						<div class="col-md-8">
+							<button type="submit" class="btn btn-success">Add plant</button>
+							<a class="btn btn-danger" th:href="@{/}">Cancel</a>
+						</div>
+					</div>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+
+
+	<div th:replace="common/header :: body-bottom-scripts" />
+</body>
+</html>

@@ -1,0 +1,56 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1000/xhtml">
+<head th:replace="common/header :: common-header" />
+
+<body>
+	<div th:replace="common/header :: navbar" />
+	
+	<div class="container">
+		<div>
+			<ol class="breadcrumb">
+				<li><a th:href="@{/plant/plantList}"><i class="fa fa-long-arrow-left" aria-hidden="true"></i>Go back</a></li>
+				<li><strong><a th:href="@{/plant/updatePlant?id=}+${plant.id}" class="fa fa-pencil" style="color: green"> Edit</a></strong></li>
+			</ol>
+			
+		</div>
+		
+		<div class="row">
+			<div class="col-xs-3">
+				<div class="panel panel-default">
+				<div class="panel-body">
+					<img th:src="@{${'/plant/image/'+ plant.id}}" class="img-responsive center-block" />
+					<!--<img th:src="@{${'/image/display/'+ imageGallery.id}}"
+						 class="card img-fluid" style="width:300px" alt=""/>-->
+				</div>
+				</div>
+			</div>
+			<div class="col-xs-9">
+				<h3 th:text="${plant.name}" style="color: red; font-family: cursive"></h3><br/>
+				<div class="row">
+					<div class="col-xs-6">
+						<p><strong> Name: </strong><span th:text="${plant.name}"></span></p>
+						<p><strong>Botanical Name: </strong><span th:text="${plant.botanicalName}"></span></p>
+						<p><strong>Category: </strong><span th:text="${plant.category}"></span></p>
+						<p><strong>Height: </strong><span th:text="${plant.height}"></span></p>
+						<p><strong>BloomTime: </strong><span th:text="${plant.bloomTime}"></span></p>
+						<p><strong>Difficulty Level: </strong><span th:text="${plant.difficultyLevel}"></span></p>
+					</div>
+					<div class="col-xs-6">
+						<p><strong>Shipping Weight: </strong><span th:text="${plant.shippingWeight}"></span></p>
+						<p><strong>List Price: </strong><span th:text="${plant.listPrice}"></span></p>
+						<p><strong>Our Price: </strong><span th:text="${plant.ourPrice}"></span></p>
+						<p><strong>Number in Stock: </strong><span th:text="${plant.inStockNumber}"></span></p>
+					</div>
+				</div>
+				<hr/>
+				<p><Strong>Description: </Strong><span th:utext="${plant.description}"></span></p>
+				<br/><hr/>
+			</div>
+			
+		</div>
+	</div>
+
+	<div th:replace="common/header :: body-bottom-scripts" />
+</body>
+</html>
