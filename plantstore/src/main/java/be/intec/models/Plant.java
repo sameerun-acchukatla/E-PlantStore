@@ -38,9 +38,8 @@
          String description;
          int inStockNumber;
 
-        // to not persist into DB (just to expose to view/client)
-        @Transient
-         MultipartFile plantImage;
+        @Lob
+        byte[] plantImage;
 
         // @JsonIgnore is used at field level to mark a property or list of properties to be ignored.
         // @JsonIgnore - to not expose to view (recommended to use in Dto but not in entity class)
@@ -58,13 +57,6 @@
             this.name = name;
         }
 
-        public MultipartFile getPlantImage() {
-            return plantImage;
-        }
-
-        public void setPlantImage(MultipartFile plantImage) {
-            this.plantImage = plantImage;
-        }
 
         @Override
         public String toString() {

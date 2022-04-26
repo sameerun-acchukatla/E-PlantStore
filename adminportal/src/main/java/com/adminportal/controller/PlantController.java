@@ -10,6 +10,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -82,18 +83,9 @@ public class PlantController {
 	
 	
 	@RequestMapping(value="/updatePlant", method=RequestMethod.POST)
-	public String updatePlantPost(@ModelAttribute("plant") Plant plant, @RequestParam MultipartFile  plantImageFile, HttpServletRequest request) {
-		if(!plantImageFile.isEmpty()) {
-			try {
-				byte[] bytes = plantImageFile.getBytes();
-				if(bytes != null && bytes.length > 0){
-					plant.setPlantImage(bytes);
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		plantService.save(plant);
+	public String updatePlantPost(@ModelAttribute("plant") Plant plant, @RequestParam MultipartFile  plantImageFile) {
+
+		plantService.update(plant,plantImageFile);
 
 		return "redirect:/plant/plantInfo?id="+plant.getId();
 	}
@@ -106,11 +98,9 @@ public class PlantController {
 		
 	}
 	
-	@RequestMapping(value="/remove", method=RequestMethod.POST)
-	public String remove(
-			@ModelAttribute("id") String id, Model model
-			) {
-		plantService.deleteById(Long.parseLong(id.substring(8)));
+	@RequestMapping(value="/remove/{id}", method=RequestMethod.DELETE)
+	public String remove(@PathVariable("id") Long id, Model model) {
+		plantService.deleteById(id);
 		List<Plant> plantList = plantService.findAll();
 		model.addAttribute("plantList", plantList);
 		
