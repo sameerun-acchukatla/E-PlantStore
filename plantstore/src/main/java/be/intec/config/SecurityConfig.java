@@ -8,6 +8,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -28,18 +29,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return SecurityUtility.passwordEncoder();
     }
 
-    private static final String[] PUBLIC_MATCHERS = {
+    private static final String[] PUBLIC_WEB_MATCHERS = {
             "/css/**",
             "/js/**",
             "/image/**",
             "/img/**",
             "/img/core-img/**",
             "/img/bg-img/**",
+            "/fonts/**"
+    };
+
+    private static final String[] PUBLIC_MATCHERS = {
             "/",
             "/newUser",
             "/forgetPassword",
             "/login",
-            "/fonts/**",
             "/plantshelf",
             "/plantDetail",
             "/faq",
@@ -48,17 +52,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     };
 
     @Override
+    public void configure(WebSecurity web) throws Exception {
+        web
+                .ignoring()
+                .antMatchers(PUBLIC_WEB_MATCHERS);
+    }
+
+    @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests().
-                /*	antMatchers("/**").*/
-                        antMatchers(PUBLIC_MATCHERS).
-                permitAll().anyRequest().authenticated();
 
         http
-                .csrf().disable().cors().disable()
-                .formLogin().failureUrl("/login?error")
-                /*.defaultSuccessUrl("/")*/
+                .authorizeRequests()
+                .antMatchers(PUBLIC_MATCHERS).permitAll() // #4
+                .anyRequest().authenticated() // 7
+                .and()
+                .formLogin()  // #8
+                .failureUrl("/login?error")
                 .loginPage("/login").permitAll()
                 .and()
                 .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))

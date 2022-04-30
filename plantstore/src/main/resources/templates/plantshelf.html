@@ -64,9 +64,9 @@
                             <div th:if="${plant != null}">
                                 <div class="row" style="margin-bottom: 50px;">
                                     <div class="col-xs-3">
-                                        <a th:href="@{/plantDetail?id=}+${plant.id}"><img
-                                                class="img-responsive shelf-plant"
-                                                th:src="#{adminPath}+@{/static/image/}+${plant.id}+'.jpg'" /></a>
+                                        <a th:href="@{/plantDetail?id=}+${plant.id}">
+                                            <img style="width: 150px;" class='mg-responsive shelf-plant' th:src="'data:image/jpg;base64,' + ${plant.getBase64Image()}" />
+                                        </a>
                                     </div>
                                     <div class="col-xs-9">
                                         <a th:href="@{/plantDetail?id=}+${plant.id}"><h4

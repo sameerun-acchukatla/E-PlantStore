@@ -8,15 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 public class LoginController {
 
-    @Autowired
-    private UserService userService;
-
-    @Autowired
-    private UserSecurityService userSecurityService;
-
-    @RequestMapping("/login")
+/*    @RequestMapping("/login")
     public String login(Model model) {
         model.addAttribute("classActiveLogin", true);
         return "myAccount";
-    }
+    }*/
 }

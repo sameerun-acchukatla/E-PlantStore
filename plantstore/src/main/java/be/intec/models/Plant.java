@@ -1,12 +1,15 @@
     package be.intec.models;
 
     import com.fasterxml.jackson.annotation.JsonIgnore;
-    import lombok.*;
+    import lombok.AccessLevel;
+    import lombok.Data;
+    import lombok.NoArgsConstructor;
     import lombok.experimental.FieldDefaults;
-    import org.springframework.web.multipart.MultipartFile;
 
     import javax.persistence.*;
     import java.util.List;
+
+    import static java.util.Base64.getMimeEncoder;
 
     @Data
     @NoArgsConstructor(force = true, access = AccessLevel.PUBLIC)
@@ -14,29 +17,26 @@
     @Entity
     public class Plant {
 
-        // Plant_charectarestics
-        // movement, nutrition, respiration, sensitivity, reproduction, excretion,and growth.
-
         @Id
-        @GeneratedValue(strategy= GenerationType.AUTO)
-         Long id;
-         String botanicalName;
-         String name;
-         float height;
-         String category;
-//         int isbn;
+        @GeneratedValue(strategy = GenerationType.AUTO)
+        Long id;
+        String botanicalName;
+        String name;
+        float height;
+        String category;
+        //         int isbn;
         @Enumerated(EnumType.STRING)
         BloomTime bloomTime;
         @Enumerated(EnumType.STRING)
         Difficulty difficultyLevel;
-         double shippingWeight;
-         double listPrice;
-         double ourPrice;
-         boolean active=true;
-         // to map db column if property not same as column name
-        @Column(columnDefinition="text")
-         String description;
-         int inStockNumber;
+        double shippingWeight;
+        double listPrice;
+        double ourPrice;
+        boolean active = true;
+        // to map db column if property not same as column name
+        @Column(columnDefinition = "text")
+        String description;
+        int inStockNumber;
 
         @Lob
         byte[] plantImage;
@@ -45,8 +45,7 @@
         // @JsonIgnore - to not expose to view (recommended to use in Dto but not in entity class)
         @OneToMany(mappedBy = "plant")
         @JsonIgnore
-          List<PlantToCartItem> plantToCartItemList;
-
+        List<PlantToCartItem> plantToCartItemList;
 
 
         public String getName() {
@@ -77,5 +76,14 @@
                     ", plantImage=" + plantImage +
                     ", plantToCartItemList=" + plantToCartItemList +
                     '}';
+        }
+
+        public String getBase64Image() {
+            if (plantImage != null) {
+                return getMimeEncoder().encodeToString(plantImage);
+            } else {
+                return "";
+            }
+
         }
     }

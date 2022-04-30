@@ -23,7 +23,7 @@
 
 						<div class="col-md-8">
 							<input type="text" name="name" class="form-control" id="name"
-								th:value="${plant.name}" required="required" placeholder="Title" />
+								th:value="${plant.name}" required="required" placeholder="name" />
 							<span class="help-block">Name of the plant</span>
 						</div>
 					</div>
@@ -129,7 +129,7 @@
 							Price</label>
 						<div class="col-md-8">
 							<div class="input-group">
-								<span class="input-group-addon">$</span> <input
+								<span class="input-group-addon">€</span> <input
 									th:value="${plant.listPrice}" type="number" name="listPrice" step="0.01"
 									class="form-control" id="listPrice" placeholder="List Price" />
 							</div>
@@ -143,7 +143,7 @@
 							Price</label>
 						<div class="col-md-8">
 							<div class="input-group">
-								<span class="input-group-addon">$</span> <input
+								<span class="input-group-addon">€</span> <input
 									th:value="${plant.ourPrice}" type="number" name="ourPrice" step="0.01"
 									class="form-control" id="ourPrice" placeholder="Our Price" />
 							</div>

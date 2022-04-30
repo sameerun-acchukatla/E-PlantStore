@@ -32,7 +32,7 @@
 							<button type="submit" class="btn btn-warning btn-block">Place
 								your order</button>
 							<p style="font-size: smaller;">
-								By placing your order, you agree to Le's Plantstore <a href="#">privacy</a>
+								By placing your order, you agree to Sidra's Plantstore <a href="#">privacy</a>
 								notice and <a href="#">conditions</a> of use.
 							</p>
 							<hr />
@@ -307,7 +307,7 @@
 											placeholder="Street Address 1"
 											th:name="billingAddressStreet1" required="required"
 											th:value="${billingAddress.billingAddressStreet1}" /> <input
-											type="text" class="form-control billingAddress" id="billingAddress"
+											type="text" class="form-control billingAddress" id="billingAddress1"
 											placeholder="Street Address 2"
 											th:name="billingAddressStreet2"
 											th:value="${billingAddress.billingAddressStreet2}" />
@@ -392,10 +392,8 @@
 									<div class="row" th:each="cartItem : ${cartItemList}">
 											<hr />
 											<div class="col-xs-2">
-												<a th:href="@{/plantDetail(id=${cartItem.plant.id})}"> <img
-													class="img-responsive shelf-plant"
-													th:src="#{adminPath}+@{/image/plant/}+${cartItem.plant.id}+'.jpg'"
-													style="width: 70px;" />
+												<a th:href="@{/plantDetail(id=${cartItem.plant.id})}">
+													<img style="width: 150px;" class='mg-responsive shelf-plant' th:src="'data:image/jpg;base64,' + ${cartItem.plant.getBase64Image()}" />
 												</a>
 											</div>
 											<div class="col-xs-6">
@@ -433,7 +431,7 @@
 									<h4 class="col-xs-12 text-right">
 										<strong style="font-size: large;">Order Total (<span
 											th:text="${#lists.size(cartItemList)}"></span> items):
-										</strong> <span style="color: #db3208; font-szie: large;">$<span
+										</strong> <span style="color: #db3208; font-szie: large;">€<span
 											th:text="${shoppingCart.grandTotal}"></span></span>
 									</h4>
 									<br />

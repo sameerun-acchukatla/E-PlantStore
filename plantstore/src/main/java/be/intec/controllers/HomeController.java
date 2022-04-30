@@ -7,6 +7,7 @@ import be.intec.services.*;
 import be.intec.services.Impl.UserSecurityService;
 import be.intec.utility.SecurityUtility;
 import be.intec.utility.USConstants;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -64,6 +65,22 @@ public class HomeController {
     @RequestMapping("/faq")
     public String faq() {
         return "faq";
+    }
+
+    @RequestMapping("/plantshelf")
+    public String bookshelf(Model model, Principal principal) {
+
+        if(principal != null) {
+            String username = principal.getName();
+            User user = userService.findByUsername(username);
+            model.addAttribute("user", user);
+        }
+
+        List<Plant> bookList = plantService.findAll();
+        model.addAttribute("plantList", bookList);
+        model.addAttribute("activeAll",true);
+
+        return "plantshelf";
     }
 
     @RequestMapping("/plantDetail")
@@ -390,21 +407,30 @@ public class HomeController {
             HttpServletRequest request,
             @ModelAttribute("email") String userEmail,
             @ModelAttribute("username") String username,
+            @ModelAttribute("password") String password,
             Model model
     ) throws Exception{
-        model.addAttribute("classActiveNewAccount", true);
+
         model.addAttribute("email", userEmail);
         model.addAttribute("username", username);
 
         if (userService.findByUsername(username) != null) {
+            model.addAttribute("classActiveNewAccount", true);
             model.addAttribute("usernameExists", true);
 
             return "myAccount";
         }
 
         if (userService.findByEmail(userEmail) != null) {
+            model.addAttribute("classActiveNewAccount", true);
             model.addAttribute("emailExists", true);
 
+            return "myAccount";
+        }
+
+        if(password == null || Strings.isBlank(password) || password.length() > 16) {
+            model.addAttribute("classActiveNewAccount", true);
+            model.addAttribute("invalidPassword", true);
             return "myAccount";
         }
 
@@ -412,7 +438,7 @@ public class HomeController {
         user.setUsername(username);
         user.setEmail(userEmail);
 
-        String password = SecurityUtility.randomPassword();
+        //String password = SecurityUtility.randomPassword();
 
         String encryptedPassword = SecurityUtility.passwordEncoder().encode(password);
         user.setPassword(encryptedPassword);
@@ -424,47 +450,21 @@ public class HomeController {
         userRoles.add(new UserRole(user, role));
         userService.createUser(user, userRoles);
 
-//        String token = UUID.randomUUID().toString();
-//        userService.createPasswordResetTokenForUser(user, token);
-//
-//        String appUrl = "http://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath();
-//
-//        SimpleMailMessage email = mailConstructor.constructResetTokenEmail(appUrl, request.getLocale(), token, user, password);
-//
-//        mailSender.send(email);
-
-        model.addAttribute("emailSent", "true");
         model.addAttribute("orderList", user.getOrderList());
+        model.addAttribute("classActiveNewAccount", false);
+        model.addAttribute("classActiveLogin", true);
+        model.addAttribute("newUserCreated", true);
+        model.addAttribute("newUserName", username);
 
         return "myAccount";
     }
 
   @RequestMapping("/newUser")
-    public String newUser(Locale locale, @RequestParam("token") String token, Model model) {
-       // PasswordResetToken passToken = userService.getPasswordResetToken(token);
-//
-//        if (passToken == null) {
-//            String message = "Invalid Token.";
-//            model.addAttribute("message", message);
-//            return "redirect:/badRequest";
-//        }
-//
-//       // User user = passToken.getUser();
-//        String username = user.getUsername();
-//
-//        UserDetails userDetails = userSecurityService.loadUserByUsername(username);
-//
-//        Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails, userDetails.getPassword(),
-//                userDetails.getAuthorities());
-//
-//        SecurityContextHolder.getContext().setAuthentication(authentication);
-//
-//        model.addAttribute("user", user);
-//
-//        model.addAttribute("classActiveEdit", true);
-//        model.addAttribute("orderList", user.getOrderList());
-//
-        return "myProfile";
+    public String newUser( Model model) {
+
+      model.addAttribute("classActiveNewAccount", true);
+
+        return "myAccount";
     }
 
     @RequestMapping(value="/updateUserInfo", method=RequestMethod.POST)
@@ -495,18 +495,14 @@ public class HomeController {
             }
         }
 
-//		update password
-        if (newPassword != null && !newPassword.isEmpty() && !newPassword.equals("")){
-            BCryptPasswordEncoder passwordEncoder = SecurityUtility.passwordEncoder();
-            String dbPassword = currentUser.getPassword();
-            if(passwordEncoder.matches(user.getPassword(), dbPassword)){
-                currentUser.setPassword(passwordEncoder.encode(newPassword));
-            } else {
-                model.addAttribute("incorrectPassword", true);
-
-                return "myProfile";
-            }
+        if(newPassword == null || Strings.isBlank(newPassword) || newPassword.length() > 16) {
+            model.addAttribute("invalidPassword", true);
+            return "myProfile";
         }
+
+//		update password
+        BCryptPasswordEncoder passwordEncoder = SecurityUtility.passwordEncoder();
+        currentUser.setPassword(passwordEncoder.encode(newPassword));
 
         currentUser.setFirstName(user.getFirstName());
         currentUser.setLastName(user.getLastName());

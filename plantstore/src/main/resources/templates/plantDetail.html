@@ -29,7 +29,7 @@
         <div class="row" style="margin-top: 120px;">
             <div class="col-xs-3">
                 <h3><a th:href="@{/plantshelf}" class="fa fa-long-arrow-left" aria-hidden="true" style="color: green"> Back to plant list</a></h3><br/>
-                <img class="img-responsive shelf-plant" th:src="#{adminPath}+@{/image/}+${plant.id}+'.jpg'" />
+                <img style="width: 200px;" class='mg-responsive shelf-plant' th:src="'data:image/jpg;base64,' + ${plant.getBase64Image()}" />
             </div>
 
             <div class="col-xs-9">
@@ -51,8 +51,8 @@
                             <div class="panel-body">
                                 <div class="row">
                                     <div class="col-xs-6">
-                                        <h4>Our Price: <span style="color:#db3208;">$<span th:text="${plant.ourPrice}"></span></span></h4>
-                                        <p>List Price: <span style="text-decoration: line-through">$<span th:text="${plant.listPrice}"></span></span></p>
+                                        <h4>Our Price: <span style="color:#db3208;">€<span th:text="${plant.ourPrice}"></span></span></h4>
+                                        <p>List Price: <span style="text-decoration: line-through">€<span th:text="${plant.listPrice}"></span></span></p>
                                         <p>You save: €<span th:text="${#numbers.formatDecimal((plant.listPrice - plant.ourPrice), 0, 'COMMA', 2, 'POINT' )}"></span></p>
                                         <span>Qty: </span>
                                         <select name="qty">
