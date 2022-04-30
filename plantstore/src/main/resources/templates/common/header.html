@@ -49,11 +49,11 @@
 							class="list-group-item"><span class="glyphicon glyphicon-plant"></span> Hanging</a></li>
 							
 							<li><a th:href="@{/searchByCategory(category='indoor')}"
-							class="list-group-item"><span class="glyphicon glyphicon-plant"></span> Indoorplants</a></li>
+							class="list-group-item"><span class="glyphicon glyphicon-plant"></span> Indoor plants</a></li>
 							
 							
 							<li><a th:href="@{/searchByCategory(category='outdoor')}"
-							class="list-group-item"><span class="glyphicon glyphicon-plant"></span> Outdoorplants</a></li>
+							class="list-group-item"><span class="glyphicon glyphicon-plant"></span> Outdoor plants</a></li>
 
 							<li><a th:href="@{/faq}"><span class="glyphicon glyphicon-question-sign"></span> FAQ</a></li>
 
@@ -74,6 +74,8 @@
 								class="glyphicon glyphicon-shopping-cart"></span> SHOPPING CART</a></li>
 						<li><a sec:authorize="isAnonymous()" th:href="@{/login}"><span
 								class="glyphicon glyphicon-user"></span> MY ACCOUNT</a></li>
+						<li><a sec:authorize="isAnonymous()" th:href="@{/newUser}"><span
+								class="glyphicon glyphicon-user"></span> Create Account</a></li>
 						<li><a sec:authorize="isAuthenticated()"
 							th:href="@{/myProfile}"><span
 								class="glyphicon glyphicon-user"></span> MY ACCOUNT</a></li>
@@ -122,13 +124,6 @@
 						<li><a href="#"> Frequently Ask Questions</a></li>
 					</ul>
 				</div>
-				<div class="col-xs-3 paddingtop-bottom">
-					<h6 class="heading7">Open HOURS</h6>
-					<div class="post">
-						<p>Monday - Saturday: 9am - 8pm</p>
-						<p>Sunday: 10am - 1pm</p>
-					</div>
-				</div>
 			</div>
 		</footer>
 
@@ -138,7 +133,7 @@
 			</div>
 			<div class="col-md-6">
 				<ul class="bottom_ul">
-					<li><a th:href="badRequestPage.html">About us</a></li>
+					<li><a th:href="about.html">About us</a></li>
 					<li><a href="#">Sameerun Acchukatla</a></li>
 				</ul>
 			</div>
