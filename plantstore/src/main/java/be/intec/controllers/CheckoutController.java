@@ -2,7 +2,6 @@ package be.intec.controllers;
 
 import be.intec.models.*;
 import be.intec.services.*;
-import be.intec.utility.MailConstructor;
 import be.intec.utility.USConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -28,9 +27,6 @@ public class CheckoutController {
 
     @Autowired
     private JavaMailSender mailSender;
-
-    @Autowired
-    private MailConstructor mailConstructor;
 
     @Autowired
     private UserService userService;

@@ -21,18 +21,25 @@ public class UserServiceImpl implements UserService {
 
     private static final Logger LOG = LoggerFactory.getLogger(UserService.class);
 
-    @Autowired
-    private UserRepository userRepository;
+
+    private final UserRepository userRepository;
+
+
+    private final  RoleRepository roleRepository;
+
+
+    private final  UserPaymentRepository userPaymentRepository;
+
+
+    private final  UserShippingRepository userShippingRepository;
 
     @Autowired
-    private RoleRepository roleRepository;
-
-    @Autowired
-    private UserPaymentRepository userPaymentRepository;
-
-    @Autowired
-    private UserShippingRepository userShippingRepository;
-
+    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, UserPaymentRepository userPaymentRepository, UserShippingRepository userShippingRepository1) {
+        this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
+        this.userPaymentRepository = userPaymentRepository;
+        this.userShippingRepository = userShippingRepository1;
+    }
 
     @Override
     public User findByUsername(String username) {
@@ -108,7 +115,7 @@ public class UserServiceImpl implements UserService {
         List<UserPayment> userPaymentList = userPaymentRepository.findAll();
 
         for (UserPayment userPayment:userPaymentList) {
-            if (userPayment.getId() == userPayment.getId()){
+            if (userPayment.getId() == userPaymentId ){
                 userPayment.setDefaultPayment(true);
             }else{
                 userPayment.setDefaultPayment(false);
@@ -120,7 +127,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void setUserDefaultShipping(Long userShippingId, User user) {
 
-        List<UserShipping> userShippingList = (List<UserShipping>) userShippingRepository.findAll();
+        List<UserShipping> userShippingList = userShippingRepository.findAll();
 
         for (UserShipping userShipping : userShippingList) {
             if(userShipping.getId() == userShippingId) {
