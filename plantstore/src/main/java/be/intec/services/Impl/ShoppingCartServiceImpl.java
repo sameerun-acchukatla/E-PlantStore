@@ -14,11 +14,17 @@ import java.util.List;
 @Service
 public class ShoppingCartServiceImpl implements ShoppingCartService {
 
-    @Autowired
-    private CartItemService cartItemService;
+
+    private final CartItemService cartItemService;
+
+
+    private final ShoppingCartRepository shoppingCartRepository;
 
     @Autowired
-    private ShoppingCartRepository shoppingCartRepository;
+    public ShoppingCartServiceImpl(CartItemService cartItemService, ShoppingCartRepository shoppingCartRepository) {
+        this.cartItemService = cartItemService;
+        this.shoppingCartRepository = shoppingCartRepository;
+    }
 
     @Override
     public ShoppingCart updateShoppingCart(ShoppingCart shoppingCart) {

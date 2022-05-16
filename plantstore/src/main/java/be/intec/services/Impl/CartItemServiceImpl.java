@@ -5,25 +5,24 @@ import be.intec.repositories.CartItemRepository;
 import be.intec.repositories.PlantToCartItemRepository;
 import be.intec.services.CartItemService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CartItemServiceImpl implements CartItemService {
 
-    @Autowired
-    private CartItemRepository cartItemRepository;
+
+    private final CartItemRepository cartItemRepository;
+    private final PlantToCartItemRepository plantToCartItemRepository;
 
     @Autowired
-    private PlantToCartItemRepository plantToCartItemRepository;
+    public CartItemServiceImpl(CartItemRepository cartItemRepository, PlantToCartItemRepository plantToCartItemRepository) {
+        this.cartItemRepository = cartItemRepository;
+        this.plantToCartItemRepository = plantToCartItemRepository;
+    }
 
     @Override
     public List<CartItem> findByShoppingCart(ShoppingCart shoppingCart) {
@@ -53,7 +52,7 @@ public class CartItemServiceImpl implements CartItemService {
             if (plant.getId() == cartItem.getPlant().getId())
             {
                 cartItem.setQty(cartItem.getQty() + qty);
-                cartItem.setSubtotal(new BigDecimal(plant.getOurPrice()).multiply(new BigDecimal(qty)));
+                cartItem.setSubtotal(new BigDecimal(plant.getOurPrice()).multiply(new BigDecimal(cartItem.getQty())));
                 cartItemRepository.save(cartItem);
                 return  cartItem;
             }
@@ -65,7 +64,7 @@ public class CartItemServiceImpl implements CartItemService {
 
         cartItem.setQty(qty);
         cartItem.setSubtotal(new BigDecimal(plant.getOurPrice()).multiply(new BigDecimal(qty)));
-        cartItem = cartItemRepository.save(cartItem);
+        cartItemRepository.save(cartItem);
 
         PlantToCartItem plantToCartItem = new PlantToCartItem();
         plantToCartItem.setPlant(plant);

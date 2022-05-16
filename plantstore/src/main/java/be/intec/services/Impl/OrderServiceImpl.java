@@ -13,11 +13,16 @@ import java.util.List;
 @Service
 public class OrderServiceImpl implements OrderService {
 
-    @Autowired
-    private OrderRepository orderRepository;
+
+    private final  OrderRepository orderRepository;
+
+    private final CartItemService cartItemService;
 
     @Autowired
-    private CartItemService cartItemService;
+    public OrderServiceImpl(OrderRepository orderRepository, CartItemService cartItemService) {
+        this.orderRepository = orderRepository;
+        this.cartItemService = cartItemService;
+    }
 
 
     @Override

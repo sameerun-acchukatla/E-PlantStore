@@ -9,8 +9,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserShippingServiceImpl implements UserShippingService {
 
+
+    private final UserShippingRepository userShippingRepository;
+
     @Autowired
-    private UserShippingRepository userShippingRepository;
+    public UserShippingServiceImpl(UserShippingRepository userShippingRepository) {
+        this.userShippingRepository = userShippingRepository;
+    }
 
     @Override
     public UserShipping findById(Long id) {

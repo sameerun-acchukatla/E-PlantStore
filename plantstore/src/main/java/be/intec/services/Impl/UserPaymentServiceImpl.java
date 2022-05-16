@@ -9,8 +9,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserPaymentServiceImpl implements UserPaymentService {
 
+
+    private final UserPaymentRepository userPaymentRepository;
+
     @Autowired
-    private UserPaymentRepository userPaymentRepository;
+    public UserPaymentServiceImpl(UserPaymentRepository userPaymentRepository) {
+        this.userPaymentRepository = userPaymentRepository;
+    }
 
     @Override
     public UserPayment findById(Long id) {
