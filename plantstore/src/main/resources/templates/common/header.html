@@ -58,16 +58,7 @@
 							<li><a th:href="@{/faq}"><span class="glyphicon glyphicon-question-sign"></span> FAQ</a></li>
 
 							</ul></li>
-						<form class="navbar-form" th:action="@{/searchPlant}" method="post">
-							<div class="form-group">
-								<input type="text" name="keyword" class="form-control"
-									placeholder="plant name" />
-							</div>
-							
-							<button type="submit" class="btn btn-info btn-sm"><span
-								class="glyphicon glyphicon-search"></span> Search</button>
-						
-						</form>
+
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						<li><a th:href="@{/shoppingCart/cart}"><span
@@ -81,7 +72,18 @@
 								class="glyphicon glyphicon-user"></span> MY ACCOUNT</a></li>
 						<li><a sec:authorize="isAuthenticated()" th:href="@{/logout}"><span
 								class="glyphicon glyphicon-log-out"></span> LOGOUT</a></li>
+						<li><form class="navbar-form" th:action="@{/searchPlant}" method="post">
+							<div class="form-group">
+								<input type="text" name="keyword" class="form-control"
+									   placeholder="plant name" />
+							</div>
+
+							<button type="submit" class="btn btn-info btn-sm"><span
+									class="glyphicon glyphicon-search"></span> Search</button>
+
+						</form></li>
 					</ul>
+
 				</div>
 				<!--/.nav-collapse -->
 			</div>
@@ -139,7 +141,6 @@
 			</div>
 		</div>
 	</div>
-
 
 	<div th:fragment="body-bottom-scripts">
 		<script th:src="@{/js/jquery.min.js}"></script>
