@@ -33,16 +33,15 @@
 		<nav class="navbar navbar-default navbar-inverse">
 			<div class="container-fluid">
 				<div class="navbar-header">
-					<a class="navbar-brand" th:href="@{/}"><span
-						class="glyphicon glyphicon-home"></span> E-Plants</a>
+					<a class="navbar-brand" th:href="@{/}"><span class="glyphicon glyphicon-home"></span> E-Plants</a>
 				</div>
 				<div id="navbar">
 					<ul class="nav navbar-nav navbar-left">
-						<li class="dropdown"><a th:href="@{/plantshelf}"
-							class="dropdown-toggle" data-toggle="dropdown" role="button"
-							aria-haspopup="true" aria-expanded="false"><span
-								class="glyphicon glyphicon-list-alt"></span> Plants <span
-								class="caret"></span></a>
+						<li class="dropdown">
+							<a th:href="@{/plantshelf}" class="navbar-brand dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+								<span class="glyphicon glyphicon-list-alt"></span> Plants
+								<span class="caret"></span>
+							</a>
 							<ul class="dropdown-menu">
 								<li><a th:href="@{/plantshelf}"><span class="glyphicon glyphicon-th-list"></span> Browse All plants</a></li>
 								<li><a th:href="@{/searchByCategory(category='hanging')}"
@@ -92,23 +91,15 @@
 	</div>
 
 	<div th:fragment="footer">
-		<br /> <br />
+		<br />
+		<br />
 		<footer>
 			<div class="row">
-				<div class="col-xs-3 footerleft">
-					<div class="logofooter">
-<!--						<a th:href="@{/}"><img class="img-responsive"-->
-<!--							src="/image/logo.png" style="width: 200px;" /></a>-->
-					</div>
-					<p>
-						E-Plant. <br />The World's best plants are here.
-					</p>
-				</div>
-				<div class="col-xs-3 paddingtop-bottom">
-					<h6 class="heading7">CONTACT</h6>
+				<div class="col-xs-4 padding top-bottom">
+					<h4 class="heading5">Contact</h4>
 					<ul class="post">
 						<p>
-							<i class="fa fa-map-pin"></i> Brussels<br /> Belgium
+							<i class="fa fa-map-pin"></i> Brussels - Belgium
 						</p>
 						<p>
 							<i class="fa fa-phone"></i> Phone : +32 473514873
@@ -118,28 +109,27 @@
 						</p>
 					</ul>
 				</div>
-				<div class="col-xs-3 paddingtop-bottom">
-					<h6 class="heading7">LINKS</h6>
+				<div class="col-xs-4 padding  top-bottom">
+					<h4 class="heading5">Links</h4>
 					<ul class="footer-ul">
 						<li><a href="#"> Privacy Policy</a></li>
 						<li><a href="#"> Terms &#38; Conditions</a></li>
 						<li><a href="#"> Frequently Ask Questions</a></li>
+						<li><a th:href="about.html">About us</a></li>
+						<li><a href="#">Sameerun Acchukatla</a></li>
 					</ul>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="copyright">
+						<p>© 2022 - All Rights Reserved</p>
+					</div>
 				</div>
 			</div>
 		</footer>
 
-		<div class="copyright">
-			<div class="col-md-6">
-				<p>© 2022 - All Rights Reserved</p>
-			</div>
-			<div class="col-md-6">
-				<ul class="bottom_ul">
-					<li><a th:href="about.html">About us</a></li>
-					<li><a href="#">Sameerun Acchukatla</a></li>
-				</ul>
-			</div>
-		</div>
+
 	</div>
 
 	<div th:fragment="body-bottom-scripts">
