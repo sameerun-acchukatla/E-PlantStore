@@ -119,10 +119,7 @@ public class HomeController {
 
         model.addAttribute("listOfCreditCards",true);
         model.addAttribute("listOfShippingAddresses",true);
-
-//        List<String> stateList = USConstants.listOfUSStatesCode;
-
-
+        model.addAttribute("classActiveEdit",true);
         return "myProfile";
     }
 
