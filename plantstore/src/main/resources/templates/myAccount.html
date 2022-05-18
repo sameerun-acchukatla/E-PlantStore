@@ -35,8 +35,6 @@
 										account</span></a></li>
 							<li th:classappend="${classActiveLogin}? 'active'"><a
 								href="#tab-2" data-toggle="tab"><span>Log in</span></a></li>
-<!--							<li th:classappend="${classActiveForgetPassword}? 'active'"><a-->
-<!--								href="#tab-3" data-toggle="tab"><span>Forget Password</span></a></li>-->
 						</ul>
 					</div>
 
@@ -51,10 +49,6 @@
 									<div class="panel panel-default" style="border: none;">
 										<div class="panel-body"
 											style="background-color: #ededed; margin-top: 20px;">
-<!--											<div class="alert alert-info" th:if="${emailSent}">An-->
-<!--												email has been sent to the email address you just-->
-<!--												registered. Please validate your email address and update-->
-<!--												your password information.</div>-->
 											<form th:action="@{/newUser}" method="post">
 												<div class="form-group">
 													<label for="newUsername">* Username: </label>&nbsp;<span
@@ -121,6 +115,7 @@
 										</div>
 									</div>
 								</div>
+								<div>Don't have an account yet?<a th:href="@{/newUser}"> Create Account</a></div>
 							</div>
 
 							<!-- forget password -->
@@ -132,8 +127,6 @@
 											style="background-color: #ededed; margin-top: 20px;">
 											<div th:if="${emailNotExist}" class="alert alert-danger">Email
 												doesn't exist.</div>
-<!--											<div th:if="${forgetPasswordEmailSent}"-->
-<!--												class="alert alert-success">Email sent.</div>-->
 											<form th:action="@{/forgetPassword}" method="post">
 												<div class="form-group">
 													<label for="recoverEmail">* Your Email: </label> <input
