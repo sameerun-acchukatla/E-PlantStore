@@ -90,11 +90,64 @@
 	</div>
 
 	<div th:fragment="footer">
+		<br /> <br />
+		<footer>
+			<div class="row justify-content-md-center">
+				<div class="col-xs-3 footerleft">
+					<div class="logofooter">
+						<a th:href="@{/}"><img class="img-responsive"
+											   src="/image/logo.jpg" style="width: 200px;" /></a>
+					</div>
+				</div>
+				<div class="col-xs-3 paddingtop-bottom">
+					<h6 class="heading7">CONTACT</h6>
+					<ul class="post">
+						<p>
+							<i class="fa fa-map-pin"></i> Brussels - Belgium,
+						</p>
+						<p>
+							<i class="fa fa-phone"></i> Phone (BD) : +32 00234512
+						</p>
+						<p>
+							<i class="fa fa-envelope"></i> E-mail : e-plants@ecommerce.be
+						</p>
+					</ul>
+				</div>
+				<div class="col-xs-3 paddingtop-bottom">
+					<h6 class="heading7">LINKS</h6>
+					<ul class="footer-ul">
+						<li><a href="#"> Privacy Policy</a></li>
+						<li><a href="#"> Terms &#38; Conditions</a></li>
+						<li><a href="/faq"> Frequently Ask Questions</a></li>
+						<li><a href="/about">About us</a></li>
+						<li><a href="#">Sameerun Acchukatla</a></li>
+					</ul>
+				</div>
+				<div class="col-xs-3 paddingtop-bottom">
+					<h6 class="heading7">Delivery Hours</h6>
+					<div class="post">
+						<p>Monday - Saturday: 9am - 8pm</p>
+						<p>Sunday: 10am - 2pm</p>
+					</div>
+				</div>
+			</div>
+		</footer>
+
+		<div class="copyright">
+			<div class="col-md-6">
+				<p>© 2020 - All Rights Reserved</p>
+			</div>
+
+		</div>
+	</div>
+
+<!--
+	<div th:fragment="footer-old">
 		<br />
 		<br />
 		<footer>
-			<div class="row">
-				<div class="col-xs-4 padding top-bottom">
+			<div class="row align-items-end">
+				<div class="col padding top-bottom">
 					<h4 class="heading5">Contact</h4>
 					<ul class="post">
 						<p>
@@ -108,7 +161,7 @@
 						</p>
 					</ul>
 				</div>
-				<div class="col-xs-4 padding  top-bottom">
+				<div class="col padding  top-bottom">
 					<h4 class="heading5">Links</h4>
 					<ul class="footer-ul">
 						<li><a href="#"> Privacy Policy</a></li>
@@ -129,7 +182,7 @@
 		</footer>
 
 
-	</div>
+	</div>-->
 
 	<div th:fragment="body-bottom-scripts">
 		<script th:src="@{/js/jquery.min.js}"></script>
