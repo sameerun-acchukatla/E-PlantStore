@@ -24,7 +24,6 @@
         String name;
         float height;
         String category;
-        //         int isbn;
         @Enumerated(EnumType.STRING)
         BloomTime bloomTime;
         @Enumerated(EnumType.STRING)

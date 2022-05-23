@@ -1,10 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html lang="en" xmlns:th="http://www.w3.org/1000/xhtml">
+<head th:replace="common/header :: common-header" />
 
+<body>
+<div th:replace="common/header :: navbar" />
+
+<div class="container">
+    <div class="row" style="margin-bottom: -100px;">
+        <div class="col-xs-8">
+            <h2 class="section-headline">
+                <span>User Account</span>
+            </h2>
+        </div>
+
+    </div>
+    <hr   style="position: absolute; width: 100%; height: 6px; background-color: #333; z-index: -1; margin-top: -80px;" />
+
+
+    <div class="row" style="margin-top:10px">
+        <div class="col-xs-9 col-xs-offset-3">
+            <p>find us
+                In the heart of Brussels, only a five minute walk from the central station, on a very cosy square.
+
+                Oud Korenhuis 36
+                Place de la Vieille Halle aux Blés 36
+                1000 Brussels
+
+                we are open
+                Monday to Sunday
+                10 am to 6 pm
+
+                Our plant store stay open & we serve coffee to go.
+
+                * we’re open all official holidays. Closed on Christmas & New Year.
+
+                contact us
+                sameerun.shaikh@gmail.com
+
+                We are cash-less, we only accept payment by card.
+                We accept all eco-cheques* to buy plants. [*not possible on the webshop]</p>
+        </div>
+    </div>
+</div>
+<!-- end of container -->
+<div th:replace="common/header :: footer"/>
+
+<div th:replace="common/header :: body-bottom-scripts" />
 </body>
 </html>

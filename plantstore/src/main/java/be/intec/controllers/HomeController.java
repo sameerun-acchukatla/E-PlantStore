@@ -67,6 +67,11 @@ public class HomeController {
         return "faq";
     }
 
+    @RequestMapping("/about")
+    public String aboutUs() {
+        return "about";
+    }
+
     @RequestMapping("/plantshelf")
     public String bookshelf(Model model, Principal principal) {
 

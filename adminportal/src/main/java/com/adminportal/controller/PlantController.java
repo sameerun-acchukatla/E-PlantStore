@@ -63,7 +63,7 @@ public class PlantController {
 		Plant plant = plantService.findById(id);
 		if(plant != null && plant.getPlantImage() != null) {
 			try {
-				response.setContentType("image/jpeg, image/jpg, image/png, image/gif");
+				response.setContentType("image/jpeg,image/jpg,image/png,image/gif");
 				response.getOutputStream().write(plant.getPlantImage());
 				response.getOutputStream().close();
 			} catch (IOException e) {

@@ -47,6 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/plantshelf",
             "/plantDetail",
             "/faq",
+            "/about",
             "/searchByCategory",
             "/searchPlant"
     };
